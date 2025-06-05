@@ -141,7 +141,6 @@ class VideoViT(nn.Module):
             frame_size,         # (H, W) tuple or int, e.g., 224
             patch_size,         # (P, P) tuple or int, e.g., 16
             num_frames,         # Number of frames to process from video, e.g., 8
-            task='classification',  # classification or regression
             in_channels=3,      # Number of input channels (RGB=3)
             embed_dim=768,      # Dimension of the patch embeddings
             num_heads=12,       # Number of attention heads
@@ -213,14 +212,7 @@ class VideoViT(nn.Module):
         self.norm = nn.LayerNorm(embed_dim)
 
         # 7. Output Head
-        if task == 'classification':
-            self.head = nn.Linear(embed_dim, num_classes)
-        elif task == 'regression':
-            self.head = nn.Linear(embed_dim, 1)
-        else:
-            raise NotImplementedError(
-                'Task must either be \'classification\' or \'regression\''
-            )
+        self.head = nn.Linear(embed_dim, num_classes)
 
         # 8. Initialize Weights
         self.init_weights(pretrained_vit_name=pretrained_vit_name,

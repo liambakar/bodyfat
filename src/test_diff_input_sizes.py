@@ -21,14 +21,12 @@ if __name__ == "__main__":
     NUM_LAYERS = 12        # Number of transformer blocks
     # Example: 10 different video classes (e.g., actions)
     NUM_CLASSES = 10
-    TASK = 'regression'
 
     # Instantiate the VideoViT model
     model = VideoViT(
         frame_size=FRAME_SIZE,
         patch_size=PATCH_SIZE,
         num_frames=NUM_FRAMES,
-        task=TASK,
         in_channels=IN_CHANNELS,
         embed_dim=EMBED_DIM,
         num_heads=NUM_HEADS,
