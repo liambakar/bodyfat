@@ -2,6 +2,7 @@ import os
 from models.vit_model import VideoViT
 from utils.dataset import VideoDataset
 from utils.training_utils import play_video, get_dataset
+import matplotlib.pyplot as plt
 import torch
 import tqdm
 
@@ -58,7 +59,6 @@ if __name__ == "__main__":
     optimizer = torch.optim.AdamW(model.parameters(), lr=LEARNING_RATE)
 
     train_loss = []
-    raise ValueError
     for epoch in tqdm.tqdm(range(EPOCHS), unit='epoch'):
 
         model.train()
@@ -80,3 +80,11 @@ if __name__ == "__main__":
             train_loss.append(loss.item())
 
         print(f'Epoch {epoch + 1}/{EPOCHS} Loss: {running_loss}')
+
+    plt.figure()
+    plt.plot(train_loss, label='Training Loss')
+    plt.xlabel('Iteration')
+    plt.ylabel('Loss')
+    plt.title('Training Loss Curve')
+    plt.legend()
+    plt.show()

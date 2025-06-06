@@ -1,7 +1,6 @@
 import cv2
 import os
 import pandas as pd
-import torch
 
 
 def play_video(video_path: str):
